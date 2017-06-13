@@ -26,12 +26,12 @@ public class SelectionSort {
 				int currentValue = list.get(j);
 				if (currentValue > maxValue) {
 					maxValue = currentValue;
-					targetPos = j;
+					maxPos = j;
 				}
 			}
 			int temp = list.get(i);
-			list.set(i, list.get(targetPos));
-			list.set(targetPos, temp);
+			list.set(i, list.get(maxPos));
+			list.set(maxPos, temp);
 		}
 	}
 }

@@ -1,0 +1,2 @@
+INDEX VERSION 1.129+D:\GitHub\maxam\.metadata\.plugins\org.eclipse.jdt.core
+1401902998.index

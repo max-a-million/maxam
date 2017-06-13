@@ -1,0 +1,136 @@
+package maxam.collections;
+
+public class List<T> {
+	
+	private Element<T> head;
+	private Element<T> tail;
+	private int counter;
+	
+	public List() {
+		head = null;
+		tail = null;
+		counter = 0;
+	}
+	
+	public List<T> append(T value) {
+		Element<T> element = new Element<T>(value);
+		if (head == null) {
+			head = element;
+			tail = element;
+		} else {
+			tail.setNext(element);
+			tail = element;
+		}
+		counter ++;
+		return this;			
+	}
+	
+	public List<T> a(T value) {
+		append(value);
+		return this;			
+	}
+	
+	public List<?> swap(Element<T> first, Element<T> second) {
+		
+		Element<T> firstPrev = first.prev;
+		Element<T> firstNext = first.next;
+		Element<T> secondPrev = second.prev;
+		Element<T> secondNext = second.next;
+		
+		if (firstPrev != null)  firstPrev.next = second;
+		if (firstNext != null)  firstNext.prev = second;
+		if (secondPrev != null) secondPrev.next = first;
+		if (secondNext != null) secondNext.prev = first;
+		
+		first.next = secondNext;
+		second.prev = firstPrev;
+		
+		if (firstNext != second) {
+			first.prev = secondPrev;
+			second.next = firstNext;
+		} else {
+			first.prev = second;
+			second.next = first;
+		}
+		
+		if (head == first)
+			head = second;
+		else if (head == second)
+			head = first;
+		
+		return this;
+	}
+	
+	public Iterator<Element<T>> getIterator() {
+		return new ListIterator(head);
+	}
+
+	
+	@SuppressWarnings("hiding")
+	public class Element<T> {
+		
+		public T value;
+		public Element<T> next;
+		public Element<T> prev;
+		
+		public Element(T value) {
+			this.value = value;
+			this.next = null;
+		}
+		
+		public void setNext(Element<T> element) {
+			this.next = element;
+			element.prev = this;
+		}
+		
+		public Element<T> getNext() {
+			return this.next;
+		}
+		
+		public T getValue() {
+			return this.value;
+		}
+
+		public Element<T> clone() {
+			Element<T> result = new Element<T>(null);
+			result.value = this.value;
+			result.next = this.next;
+			result.prev = this.prev;
+			return result;
+		}
+
+		@SuppressWarnings("unchecked")
+		public int compareTo(List<T>.Element<T> o) {
+			Comparable<T> second = (Comparable<T>)o.value;
+			return second.compareTo(value);
+		}
+
+	}
+	
+	public class ListIterator implements Iterator<Element<T>> {
+		
+		private Element<T> current;
+		
+		public ListIterator(Element<T> head) {
+			current = head;
+		}
+
+		public boolean hasNext() {
+			return current != null;
+		}
+
+		public Element<T> next() {
+			Element<T> result = current;
+			current = current.next;
+			return result;
+		}
+		
+		public Element<T> shift(int position) { 
+			for (int idx = 0; idx < position; idx ++)
+				if (this.hasNext())
+					this.next();
+			return current;
+		}
+	}
+
+}

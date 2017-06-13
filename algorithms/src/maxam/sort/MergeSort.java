@@ -1,0 +1,45 @@
+package maxam.sort;
+
+import java.util.ArrayList;
+
+/**********************************************************
+ * 	
+ * Алгоритм сортировки слиянием:
+ * 
+
+ * 
+ *********************************************************/
+
+public class MergeSort {
+	
+	public static ArrayList<Integer> apply(ArrayList<Integer> list) {
+		int middle = list.size() / 2;
+		if (list.size() > 1) {
+			ArrayList<Integer> a = new ArrayList<Integer>();
+			ArrayList<Integer> b = new ArrayList<Integer>();
+			ArrayList<Integer> r = new ArrayList<Integer>();
+			for (int i = 0; i < middle; i ++) a.add(list.get(i));
+			for (int j = middle; j < list.size(); j ++) b.add(list.get(j));
+			a = apply(a);
+			b = apply(b);
+			merge(a, b, r);
+			return r;
+		}
+		return list;
+	}
+	
+	public static void merge(ArrayList<Integer> a, ArrayList<Integer> b, ArrayList<Integer> r) {
+		int p = a.size();
+		int q = b.size();
+		int i = 0, j = 0;
+		while ((i < p) && (j < q)) 
+			if (a.get(i) <= b.get(j)) 
+				r.add(a.get(i++));
+			else 
+				r.add(b.get(j++));
+		if (i == p) 
+			while (j < q) r.add(b.get(j++));
+		 else 
+			while (i < p) r.add(a.get(i++));
+	}
+}

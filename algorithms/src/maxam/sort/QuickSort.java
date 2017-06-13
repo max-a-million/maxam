@@ -1,0 +1,41 @@
+package maxam.sort;
+
+import java.util.ArrayList;
+
+/**********************************************************
+ * 	
+ * Алгоритм быстрой сорировки:
+ * 
+
+ * 
+ *********************************************************/
+
+public class QuickSort {
+	
+	public static void apply(ArrayList<Integer> list, int left, int right) {
+		if (left >= right) return; 
+		int i = left;
+		int j = right;
+	    int middle = i - (i - j) / 2;
+	    while (i < j) {
+	    	int p = list.get(middle);
+	    	while (i < middle && list.get(i) <= p) i++;
+	        while (j > middle && list.get(j) >= p) j--;
+	        if (i < j) {
+	        	swap(list, i, j);
+	            if (i == middle)
+	            	middle = j;
+	            else if (j == middle)
+	                middle = i;
+	        }
+	    }
+	    apply(list, left, middle);
+	    apply(list, middle + 1, right);
+	}
+	
+	public static void swap(ArrayList<Integer> a, int i, int j) {
+		int temp = a.get(i);
+		a.set(i, a.get(j));
+		a.set(j, temp);
+	}
+}

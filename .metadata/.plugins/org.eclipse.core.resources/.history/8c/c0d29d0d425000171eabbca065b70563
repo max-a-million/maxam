@@ -1,0 +1,4 @@
+package maxam.collections;
+
+public interface CollectionElement<T> {
+}

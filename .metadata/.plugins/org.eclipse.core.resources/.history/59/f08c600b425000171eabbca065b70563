@@ -1,0 +1,13 @@
+package maxam.collections;
+
+public interface Collection<T> {
+	
+	public Collection<T> append(T value);
+	public Collection<T> delete(T value);
+	
+	public Collection<T> swap(int first, int second);
+	
+	public T getValue(int position);
+	
+	public int getLength();
+}

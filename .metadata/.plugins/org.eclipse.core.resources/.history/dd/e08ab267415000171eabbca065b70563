@@ -1,0 +1,19 @@
+package maxam.sorts;
+
+import java.util.ArrayList;
+
+public class ArrayListUnsorted<T> extends ArrayList<T> {
+	
+	public ArrayListUnsorted() {
+		super();
+	}
+	
+	public ArrayListUnsorted<T> addItem(T value) {
+		this.add(value);
+		return this;
+	}
+	
+	public ArrayListUnsorted<T> a(T value) {
+		return addItem(value);
+	}
+}

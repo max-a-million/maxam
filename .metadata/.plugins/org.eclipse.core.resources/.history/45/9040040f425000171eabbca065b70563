@@ -1,0 +1,7 @@
+package maxam.collections;
+
+public interface Iterator<T> {
+	public T shift(int position);
+	public boolean hasNext();
+	public T next();
+}
